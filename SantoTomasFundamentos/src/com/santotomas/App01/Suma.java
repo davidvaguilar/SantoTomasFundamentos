@@ -9,7 +9,7 @@ package com.santotomas.App01;
  */
 public final class Suma extends Operacion {
 
-	void operar() {
+	public void operar() {
         resultado=valor1+valor2;
     }
 }
