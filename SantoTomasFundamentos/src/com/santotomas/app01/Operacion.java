@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.santotomas.App01;
+package com.santotomas.app01;
 
 import java.util.Scanner;
 
