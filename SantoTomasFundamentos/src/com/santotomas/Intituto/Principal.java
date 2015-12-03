@@ -26,9 +26,6 @@ public class Principal {
 //        
         ModeloDAO tel=new TelefonoDAO();
      //tel.create(new Telefono(2,222333));
-        
-        
-        
     }
 
 }

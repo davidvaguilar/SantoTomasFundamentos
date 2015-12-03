@@ -1,5 +1,4 @@
 /**
-
  * 
  */
 package com.santotomas.hashmap01;
@@ -14,106 +13,104 @@ import java.util.Scanner;
  */
 public class Principal {
 
-	
 	public Principal() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void menu(){
-		HashMap<String, Float> lista=new HashMap<String,Float>();
+		HashMap<String, Float> listaProductos=new HashMap<String, Float>();
 		Scanner input=new Scanner(System.in);
 		int opcion=5;
 		String codigo;
-		Float valor;
-		
+		Float precio;
 		do{
-			System.out.println("Ingrese Opcion valida:");
-			System.out.println("1.- Introducir producto");
-			System.out.println("2.- Actualizar Producto");
-			System.out.println("3.- Mostrar Productos");
-			System.out.println("4.- Eliminar Productos");
-			System.out.println("5.- Salir");
-			opcion=input.nextInt();
-			
-			switch (opcion) {
+			System.out.println("Introducir el numero de la opcion: ");
+			System.out.println("1.- Introducir Productos");
+			System.out.println("2.- Modificar precio");
+	        System.out.println("3.- Mostrar todos los productos");
+	        System.out.println("4.- Eliminar producto");
+	        System.out.println("5.- Salir");
+	        opcion=input.nextInt();
+	        
+	        switch (opcion) {
 			case 1:
-				System.out.println("Ingrese codigo");
-				codigo=input.next();
-				System.out.println("Ingrese valor");
-				valor=input.nextFloat();
-				guardar(codigo, valor, lista);
+				System.out.println("Introduce el códido del producto:");
+                codigo = input.next();
+                System.out.println("Introduce el precio del producto:");
+                precio = input.nextFloat();
+                guardarProducto(codigo,precio,listaProductos);
 				break;
 			case 2:
-				System.out.println("Ingrese codigo a modificar");
-				codigo=input.next();
-				modificar(codigo, lista);
-				
+				System.out.println("Introduce el códido del producto del que quieres cambiar el precio:");
+                codigo = input.next();
+                modificaPrecio(codigo,listaProductos);
 				break;
 			case 3:
-				mostrar(lista);
-				
+				mostrarProductos(listaProductos);
 				break;
 			case 4:
-				System.out.println("Ingrese codigo a eliminar");
-				codigo=input.next();
-				eliminar(codigo,lista);
+				System.out.println("Introduce el códido del producto que quieres eliminar:");
+                codigo = input.next();
+                eliminaProducto(codigo,listaProductos);
 				break;
 			case 5:
 				break;
 			default:
-				System.out.println("Opcion No Valida");
+				break;
 			}
-			
+	        
 		}while(opcion!=5);
 		
-		
-	}
-	
-	public static void guardar(String codigo, Float valor, HashMap<String, Float> listaProductos){
-		if(listaProductos.containsKey(codigo)){
-			System.out.println("Valor ya existe");
-		}else{
-			listaProductos.put(codigo, valor);
-		}
-	}
-	
-	public static void modificar(String codigo, HashMap<String, Float>lista){
-		Scanner entrada=new Scanner(System.in);
-		if (lista.containsKey(codigo)) {
-			System.out.println("Ingrese el valor ");
-			lista.put(codigo, entrada.nextFloat());
-		}else{
-			System.out.println("No existe valor a modificar");
-		}
-		
-	}
-	
-	public static void mostrar(HashMap<String, Float>lista){
-		String clave;
-		Iterator<String> lis=lista.keySet().iterator();
-		while(lis.hasNext()){
-			clave=lis.next();
-			System.out.println(lista.get(clave));
-		}
-		
 	}
 	
 	
-	public static void eliminar (String codigo, HashMap<String, Float>lis){
-		if(lis.containsKey(codigo)){
-			lis.remove(codigo);
-		}else{
-			System.out.println("No existe el valor buscado");
-		}
-		
+	public static void guardarProducto(String codigo, float precio, HashMap <String,Float> listaProductos){
+	    if (listaProductos.containsKey(codigo)){
+	        System.out.println("No se puede introducir el producto. El código esta repetido.");
+	    }
+	    else{
+	        listaProductos.put(codigo, precio);               
+	    }
 	}
+	
+	
+	public static void modificaPrecio(String codigo, HashMap<String,Float> listaProductos){
+	    Scanner sc = new Scanner(System.in);
+	    if (listaProductos.containsKey(codigo)){
+	        System.out.println("Introduce el precio del producto:");
+	        listaProductos.put(codigo, sc.nextFloat());            
+	    }
+	    else{
+	        System.out.println("No hay ningun producto con ese código.");
+	    }
+	}
+	
+	public static void mostrarProductos(HashMap<String, Float> listaProductos){
+	    String clave;
+	    Iterator<String> productos = listaProductos.keySet().iterator();
+	    System.out.println("Hay los siguientes productos:");
+
+	    while(productos.hasNext()){
+	        clave = productos.next();
+	        System.out.println(clave + " - " + listaProductos.get(clave));
+	    }        
+	}
+	
+
+	public static void eliminaProducto(String codigo, HashMap<String,Float> listaProductos){
+	        if (listaProductos.containsKey(codigo)){
+	            listaProductos.remove(codigo);
+	        }
+	        else{
+	            System.out.println("No hay ningun producto con ese código.");  
+	        }       
+	    } 
+	
 	/**
-	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Principal consola=new Principal();
-		consola.menu();
+		Principal interfazComando=new Principal();
+		interfazComando.menu();
 
 	}
 
